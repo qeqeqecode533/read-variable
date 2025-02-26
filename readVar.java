@@ -7,155 +7,180 @@ public class readVar {
     private static void ptl(Object value) {
         System.out.println(value);
     }
-    static Scanner scanInt = new Scanner(System.in);
-    static Scanner scanString = new Scanner(System.in);
-    static Scanner scanDouble = new Scanner(System.in);
-    static Scanner scanFloat = new Scanner(System.in);
-    static Scanner scanBoolean = new Scanner(System.in);
+    static Scanner scan = new Scanner(System.in);
     static String empty = "";
-    public static int readInt(int min, int max, String prompt, String reprompt, boolean first) {
+    public static int readInt(int min, int max, String prompt, String reprompt) {
         int value;
         String check;
-        if (first) pt(prompt);
-        else pt(reprompt);
-        if (scanInt.hasNextInt()) {
-            value = scanInt.nextInt();
-            if ((value >= min && value <= max)) {
-                return value;
+        pt(prompt);
+        while (true) {
+            check = scan.nextLine();
+            if (!check.isEmpty()) {
+                try {
+                    value = Integer.parseInt(check.trim());
+                } catch (NumberFormatException e) {
+                    pt(reprompt);
+                    continue;
+                }
+                if (value >= min && value <= max) {
+                    return value;
+                }
             }
-        }
-        check = scanInt.nextLine();
-        if (check.isEmpty()) {
-            scanInt.nextLine();
-        }
-        return readInt(min, max, prompt, reprompt, false);
-    }
-    public static int readInt(int min, int max, String prompt, String reprompt) {
-        return readInt(min, max, prompt, reprompt, true);
-    }
-    public static int readInt(int min, int max, String prompt) {
-        return readInt(min, max, prompt, prompt, true);
-    }
-    public static int readInt(int min, int max) {
-        return readInt(min, max, empty, empty, true);
-    }
-    public static int readInt(String prompt, String reprompt) {
-        return readInt(Integer.MIN_VALUE, Integer.MAX_VALUE, prompt, reprompt, true);
-    }
-    public static int readInt(String prompt) {
-        return readInt(Integer.MIN_VALUE, Integer.MAX_VALUE, prompt, prompt, true);
-    }
-    public static String readLine(String prompt, String reprompt, boolean first) {
-        String value;
-        if (first) {
-            pt(prompt);
-        } else {
             pt(reprompt);
         }
-        value = scanString.nextLine();
-        if (!value.isEmpty()) {
-            return value;
-        }
-        return readLine(prompt, reprompt, false);
+    }
+    public static int readInt(int min, int max, String prompt) {
+        return readInt(min, max, prompt, prompt);
+    }
+    public static int readInt(int min, int max) {
+        return readInt(min, max, empty, empty);
+    }
+    public static int readInt(int min) { // assume minimum if only 1 number
+        return readInt(min, Integer.MAX_VALUE, empty, empty);
+    }
+    public static int readInt(int min, String prompt) {
+        return readInt(min, Integer.MAX_VALUE, prompt, prompt);
+    }
+    public static int readInt(int min, String prompt, String reprompt) {
+        return readInt(min, Integer.MAX_VALUE, prompt, reprompt);
+    }
+    public static int readInt(String prompt, String reprompt) {
+        return readInt(Integer.MIN_VALUE, Integer.MAX_VALUE, prompt, reprompt);
+    }
+    public static int readInt(String prompt) {
+        return readInt(Integer.MIN_VALUE, Integer.MAX_VALUE, prompt, prompt);
     }
     public static String readLine(String prompt, String reprompt) {
-        return readLine(prompt, reprompt, true);
+        String value;
+        pt(prompt);
+        while (true) {
+            value = scan.nextLine();
+            if (!value.isEmpty()) {
+                return value;
+            }
+            pt(reprompt);
+        }
     }
     public static String readLine(String prompt) {
-        return readLine(prompt, prompt, true);
+        return readLine(prompt, prompt);
     }
     public static String readLine() {
-        return readLine(empty, empty, true);
-    }
-    public static double readDouble(double min, double max, String prompt, String reprompt, boolean first) {
-        double value;
-        String check;
-        if (first) pt(prompt);
-        else pt(reprompt);
-        if (scanDouble.hasNextDouble()) {
-            value = scanDouble.nextDouble();
-            if ((value >= min && value <= max)) {
-                return value;
-            }
-        }
-        check = scanDouble.nextLine();
-        if (check.isEmpty()) {
-            scanDouble.nextLine();
-        }
-        return readDouble(min, max, prompt, reprompt, false);
+        return readLine(empty, empty);
     }
     public static double readDouble(double min, double max, String prompt, String reprompt) {
-        return readDouble(min, max, prompt, reprompt, true);
+        double value;
+        String check;
+        pt(prompt);
+        while (true) {
+            check = scan.nextLine();
+            if (!check.isEmpty()) {
+                try {
+                    value = Double.parseDouble(check.trim());
+                } catch (NumberFormatException e) {
+                    pt(reprompt);
+                    continue;
+                }
+                if (value >= min && value <= max) {
+                    return value;
+                }
+            }
+            pt(reprompt);
+        }
     }
     public static double readDouble(double min, double max, String prompt) {
-        return readDouble(min, max, prompt, prompt, true);
+        return readDouble(min, max, prompt, prompt);
     }
     public static double readDouble(double min, double max) {
-        return readDouble(min, max, empty, empty, true);
+        return readDouble(min, max, empty, empty);
+    }
+    public static double readDouble(double min) {
+        return readDouble(min, Double.MAX_VALUE, empty, empty);
+    }
+    public static double readDouble(double min, String prompt) {
+        return readDouble(min, Double.MAX_VALUE, prompt, prompt);
+    }
+    public static double readDouble(double min, String prompt, String reprompt) {
+        return readDouble(min, Double.MAX_VALUE, prompt, reprompt);
     }
     public static double readDouble(String prompt, String reprompt) {
-        return readDouble(-Double.MAX_VALUE, Double.MAX_VALUE, prompt, reprompt, true);
+        return readDouble(-Double.MAX_VALUE, Double.MAX_VALUE, prompt, reprompt);
     }
     public static double readDouble(String prompt) {
-        return readDouble(-Double.MAX_VALUE, Double.MAX_VALUE, prompt, prompt, true);
-    }
-    public static float readFloat(float min, float max, String prompt, String reprompt, boolean first) {
-        float value;
-        String check;
-        if (first) pt(prompt);
-        else pt(reprompt);
-        if (scanFloat.hasNextFloat()) {
-            value = scanFloat.nextFloat();
-            if ((value >= min && value <= max)) {
-                return value;
-            }
-        }
-        check = scanFloat.nextLine();
-        if (check.isEmpty()) {
-            scanFloat.nextLine();
-        }
-        return readFloat(min, max, prompt, reprompt, false);
+        return readDouble(-Double.MAX_VALUE, Double.MAX_VALUE, prompt, prompt);
     }
     public static float readFloat(float min, float max, String prompt, String reprompt) {
-        return readFloat(min, max, prompt, reprompt, true);
+        float value;
+        String check;
+        pt(prompt);
+        while (true) {
+            check = scan.nextLine();
+            if (!check.isEmpty()) {
+                try {
+                    value = Float.parseFloat(check.trim());
+                } catch (NumberFormatException e) {
+                    pt(reprompt);
+                    continue;
+                }
+                if (value >= min && value <= max) {
+                    return value;
+                }
+            }
+            pt(reprompt);
+        }
     }
     public static float readFloat(float min, float max, String prompt) {
-        return readFloat(min, max, prompt, prompt, true);
+        return readFloat(min, max, prompt, prompt);
     }
     public static float readFloat(float min, float max) {
-        return readFloat(min, max, empty, empty, true);
+        return readFloat(min, max, empty, empty);
+    }
+    public static float readFloat(float min) {
+        return readFloat(min, Float.MAX_VALUE, empty, empty);
+    }
+    public static float readFloat(float min, String prompt) {
+        return readFloat(min, Float.MAX_VALUE, prompt, prompt);
+    }
+    public static float readFloat(float min, String prompt, String reprompt) {
+        return readFloat(min, Float.MAX_VALUE, prompt, reprompt);
     }
     public static float readFloat(String prompt, String reprompt) {
-        return readFloat(-Float.MAX_VALUE, Float.MAX_VALUE, prompt, reprompt, true);
+        return readFloat(-Float.MAX_VALUE, Float.MAX_VALUE, prompt, reprompt);
     }
     public static float readFloat(String prompt) {
-        return readFloat(-Float.MAX_VALUE, Float.MAX_VALUE, prompt, prompt, true);
+        return readFloat(-Float.MAX_VALUE, Float.MAX_VALUE, prompt, prompt);
     }
-    public static boolean readBoolean(String prompt, String reprompt, boolean first) {
+    public static boolean readBool(String prompt, String reprompt) {
         boolean value;
-        if (first) pt(prompt);
-        else pt(reprompt);
-        if (scanBoolean.hasNextBoolean()) {
-            value = scanBoolean.nextBoolean();
-            return value;
+        String check;
+        pt(prompt);
+        while (true) {
+            check = scan.nextLine();
+            if (!check.isEmpty()) {
+                try {
+                    if (check.equalsIgnoreCase("true")) {
+                        value = true;
+                    } else if (check.equalsIgnoreCase("false")) {
+                        value = false;
+                    } else {
+                        throw new IllegalArgumentException("Invalid boolean value: " + check);
+                    }
+                } catch (IllegalArgumentException e) {
+                    pt(reprompt);
+                    continue;
+                }
+                return value;
+            }
+            pt(reprompt);
         }
-        scanBoolean.nextLine();
-        return readBoolean(prompt, reprompt, false);
     }
-    public static boolean readBoolean(String prompt, String reprompt) {
-        return readBoolean(prompt, reprompt, true);
+    public static boolean readBool(String prompt) {
+        return readBool(prompt, prompt);
     }
-    public static boolean readBoolean(String prompt) {
-        return readBoolean(prompt, prompt, true);
-    }
-    public static boolean readBoolean() {
-        return readBoolean(empty, empty, true);
+    public static boolean readBool() {
+        return readBool(empty, empty);
     }
     public static void close() {
-        scanInt.close();
-        scanString.close();
-        scanDouble.close();
-        scanFloat.close();
-        scanBoolean.close();
+        scan.close();
+        ptl("Scanner closed.");
     }
 }
