@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
 public class readVar {
-    public static void pt(Object value) {
+    private static void pt(Object value) {
         System.out.print(value);
     }
-    public static void ptl(Object value) {
+    private static void ptl(Object value) {
         System.out.println(value);
     }
     static Scanner scanInt = new Scanner(System.in);
@@ -15,6 +15,7 @@ public class readVar {
     static String empty = "";
     public static int readInt(int min, int max, String prompt, String reprompt, boolean first) {
         int value;
+        String check;
         if (first) pt(prompt);
         else pt(reprompt);
         if (scanInt.hasNextInt()) {
@@ -23,7 +24,10 @@ public class readVar {
                 return value;
             }
         }
-        scanInt.nextLine();
+        check = scanInt.nextLine();
+        if (check.isEmpty()) {
+            scanInt.nextLine();
+        }
         return readInt(min, max, prompt, reprompt, false);
     }
     public static int readInt(int min, int max, String prompt, String reprompt) {
@@ -65,6 +69,7 @@ public class readVar {
     }
     public static double readDouble(double min, double max, String prompt, String reprompt, boolean first) {
         double value;
+        String check;
         if (first) pt(prompt);
         else pt(reprompt);
         if (scanDouble.hasNextDouble()) {
@@ -73,7 +78,10 @@ public class readVar {
                 return value;
             }
         }
-        scanDouble.nextLine();
+        check = scanDouble.nextLine();
+        if (check.isEmpty()) {
+            scanDouble.nextLine();
+        }
         return readDouble(min, max, prompt, reprompt, false);
     }
     public static double readDouble(double min, double max, String prompt, String reprompt) {
@@ -93,6 +101,7 @@ public class readVar {
     }
     public static float readFloat(float min, float max, String prompt, String reprompt, boolean first) {
         float value;
+        String check;
         if (first) pt(prompt);
         else pt(reprompt);
         if (scanFloat.hasNextFloat()) {
@@ -101,7 +110,10 @@ public class readVar {
                 return value;
             }
         }
-        scanFloat.nextLine();
+        check = scanFloat.nextLine();
+        if (check.isEmpty()) {
+            scanFloat.nextLine();
+        }
         return readFloat(min, max, prompt, reprompt, false);
     }
     public static float readFloat(float min, float max, String prompt, String reprompt) {
